@@ -15,8 +15,6 @@ class MainViewPresenter {
     
     weak private var mainViewDelegate: MainViewDelegate?
     
-    private let networkManager = NetworkManager()
-    
     private var latitude: Float?
     private var longitude: Float?
     private(set) var models = [Forecastday]()
@@ -43,7 +41,7 @@ class MainViewPresenter {
         guard let latitude = latitude, let longitude = longitude else { return }
         
         do {
-            try networkManager.obtainWeatherResults(latitude: latitude, longitude: longitude) {[weak self] (result) in
+            try NetworkManager.shared.obtainWeatherResults(latitude: latitude, longitude: longitude) {[weak self] (result) in
                 switch result {
                 case .success(let result):
                     let dailyForecasts = result.forecast.forecastday

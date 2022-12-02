@@ -9,6 +9,10 @@ import Foundation
 
 class NetworkManager {
     
+    static let shared = NetworkManager()
+    
+    private init() {}
+    
     enum ObtainResult {
         case success(result: WeatherResponse?)
         case failure(error: Error)
@@ -43,5 +47,9 @@ class NetworkManager {
                 completion(.failure(ResultFetchError.unknown))
             }
         }.resume()
+    }
+    
+    func obtainPicture(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        urlSession.dataTask(with: url, completionHandler: completion).resume()
     }
 }

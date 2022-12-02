@@ -59,7 +59,7 @@ struct Current: Codable {
 
 // MARK: - Condition
 struct Condition: Codable {
-    let day, night: Text
+    let text: Text
     let icon: String
     let code: Int
 }
