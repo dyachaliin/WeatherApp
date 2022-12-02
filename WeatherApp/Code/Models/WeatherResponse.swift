@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum WindDirection {
+    case north, northwest, west, southwest, south, southeast, east, northeast
+}
+
 // MARK: - WeatherResponse
 struct WeatherResponse: Codable {
     let location: Location
@@ -153,7 +157,7 @@ struct Day: Codable {
     let maxtempC, maxtempF, mintempC, mintempF: Double
     let avgtempC, avgtempF, maxwindMph, maxwindKph: Double
     let totalprecipMm, totalprecipIn: Double
-    let totalsnowCM: Int
+    let totalsnowCM: Double
     let avgvisKM: Double
     let avgvisMiles, avghumidity, dailyWillItRain, dailyChanceOfRain: Int
     let dailyWillItSnow, dailyChanceOfSnow: Int

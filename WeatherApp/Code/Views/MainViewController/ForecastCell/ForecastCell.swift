@@ -7,10 +7,6 @@
 
 import UIKit
 
-enum DayTime {
-    case day, night
-}
-
 class ForecastCell: UITableViewCell {
 
     static let identifier = String(describing: ForecastCell.self)
@@ -25,12 +21,17 @@ class ForecastCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        
     }
     
     func configure(with model: Forecastday) {
         getPicture(from: model.day.condition.icon)
-        dayLabel.text = getWeekDay(from: model.date)
+        dayLabel.text = model.date.getWeekDay().uppercased()
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
+    }
+    
+    func cellSelected() {
+        dayLabel.textColor = UIColor(named: "lightBlue")
     }
     
     func getPicture(from url: String) {
@@ -44,14 +45,14 @@ class ForecastCell: UITableViewCell {
         }
     }
     
-    private func getWeekDay(from date: String) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: date) else { return "" }
-        dateFormatter.dateFormat = "E"
-        let dayOfTheWeekString = dateFormatter.string(from: date)
-        return dayOfTheWeekString
-    }
+//    private func getWeekDay(from date: String) -> String {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        guard let date = dateFormatter.date(from: date) else { return "" }
+//        dateFormatter.dateFormat = "E"
+//        let dayOfTheWeekString = dateFormatter.string(from: date)
+//        return dayOfTheWeekString
+//    }
     
     private func makeTextPower(from string: String) -> NSMutableAttributedString {
         let font:UIFont? = UIFont(name: "Helvetica", size: 20)

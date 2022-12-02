@@ -11,6 +11,12 @@ import CoreLocation
 class MainViewController: UIViewController {
     
     @IBOutlet weak var forecastTableView: UITableView!
+    @IBOutlet weak var currentLocationLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var conditionImage: UIImageView!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var windLabel: UILabel!
     
     private let presenter: MainViewPresenter = MainViewPresenter()
     
@@ -29,9 +35,19 @@ class MainViewController: UIViewController {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLocation()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     func setupLocation() {
@@ -51,9 +67,17 @@ class MainViewController: UIViewController {
         print(longitude)
     }
     
+    func getWindDirection() {
+        
+    }
+    
 }
 
 extension MainViewController: MainViewDelegate {
+    func updateImage(with data: Data) {
+        conditionImage.image = UIImage(data: data)
+    }
+    
     func updateTableView() {
         forecastTableView.reloadData()
     }
@@ -79,9 +103,33 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: ForecastCell.identifier, for: indexPath) as? ForecastCell, let model = presenter.weatherModel(at: indexPath.row) {
             cell.configure(with: model)
+            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()
+    }
+    
+//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        tableView.desele
+//        return indexPath
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let model = presenter.weatherModel(at: indexPath.row) else { return }
+        currentLocationLabel.text = presenter.location
+        dateLabel.text = "\(model.date.getWeekDay().uppercased()), \(model.date.getDate())"
+        presenter.getPicture(from: model.day.condition.icon)
+        temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
+        humidityLabel.text = "\(model.day.avghumidity)%"
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.rowHeight
     }
     
 }

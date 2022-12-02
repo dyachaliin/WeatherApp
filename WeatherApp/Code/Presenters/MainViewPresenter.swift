@@ -9,6 +9,7 @@ import Foundation
 
 protocol MainViewDelegate: NSObjectProtocol {
     func updateTableView()
+    func updateImage(with data: Data)
 }
 
 class MainViewPresenter {
@@ -17,6 +18,8 @@ class MainViewPresenter {
     
     private var latitude: Float?
     private var longitude: Float?
+    private(set) var location: String?
+    
     private(set) var models = [Forecastday]()
     
     func setViewDelegate(mainViewDelegate: MainViewDelegate?){
@@ -46,6 +49,7 @@ class MainViewPresenter {
                 case .success(let result):
                     let dailyForecasts = result.forecast.forecastday
                     self?.models.append(contentsOf: dailyForecasts)
+                    self?.location = result.location.name
                     
                     DispatchQueue.main.async {
                         self?.mainViewDelegate?.updateTableView()
@@ -57,6 +61,17 @@ class MainViewPresenter {
             }
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func getPicture(from url: String) {
+        guard let url = URL(string: "https:\(url)") else { return }
+        NetworkManager.shared.obtainPicture(from: url) { data, error in
+            guard let data = data, error == nil else { return }
+
+            DispatchQueue.main.async() { [weak self] in
+                self?.mainViewDelegate?.updateImage(with: data)
+            }
         }
     }
     
