@@ -21,8 +21,8 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         presenter.setViewDelegate(mainViewDelegate: self)
         
-        forecastTableView.register(HourlyForecastCell.self, forCellReuseIdentifier: HourlyForecastCell.identifier)
-        forecastTableView.register(ForecastCell.self, forCellReuseIdentifier: ForecastCell.identifier)
+        forecastTableView.register(UINib(nibName: HourlyForecastCell.identifier, bundle: nil), forCellReuseIdentifier: HourlyForecastCell.identifier)
+        forecastTableView.register(UINib(nibName: ForecastCell.identifier, bundle: nil), forCellReuseIdentifier: ForecastCell.identifier)
         
         forecastTableView.delegate = self
         forecastTableView.dataSource = self
@@ -32,7 +32,6 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLocation()
-//        presenter.obtainWeatherResults()
     }
     
     func setupLocation() {
@@ -74,16 +73,15 @@ extension MainViewController: CLLocationManagerDelegate {
 
 extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.models.count
+        presenter.numberOfWeatherItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ForecastCell.identifier, for: indexPath) as? ForecastCell, let model = presenter.weatherModel(at: indexPath.row) {
+            cell.configure(with: model)
+            return cell
+        }
         return UITableViewCell()
     }
-    
-    
-}
-
-struct Weather {
     
 }

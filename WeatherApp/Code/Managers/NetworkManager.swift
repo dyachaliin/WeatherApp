@@ -25,7 +25,7 @@ class NetworkManager {
     
     func obtainWeatherResults(latitude: Float, longitude: Float, completion: @escaping (Result<WeatherResponse, Error>) -> Void) throws {
         
-        guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=\(key)&q=\(latitude),\(longitude)&days=7") else {
+        guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=\(key)&q=\(latitude),\(longitude)&days=8") else {
             throw ResultFetchError.invalidUrl
         }
         

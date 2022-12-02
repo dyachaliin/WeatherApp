@@ -25,11 +25,20 @@ class MainViewPresenter {
         self.mainViewDelegate = mainViewDelegate
     }
     
+    func numberOfWeatherItems() -> Int {
+        return models.count
+    }
+    
+    func weatherModel(at index: Int) -> Forecastday? {
+        return models[index]
+    }
+    
     func getCoordinates(latitude: Float, longitude: Float) {
         self.latitude = latitude
         self.longitude = longitude
     }
     
+   
     func obtainWeatherResults() {
         guard let latitude = latitude, let longitude = longitude else { return }
         

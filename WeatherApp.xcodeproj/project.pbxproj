@@ -13,13 +13,13 @@
 		5DC1674F2937FA28000B49E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC1674D2937FA28000B49E7 /* LaunchScreen.storyboard */; };
 		5DC70BBE2938052800A75CDB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BBC2938052800A75CDB /* MainViewController.swift */; };
 		5DC70BBF2938052800A75CDB /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC70BBD2938052800A75CDB /* MainViewController.xib */; };
-		5DC70BC429382A9C00A75CDB /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BC229382A9C00A75CDB /* ForecastCell.swift */; };
-		5DC70BC529382A9C00A75CDB /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC70BC329382A9C00A75CDB /* ForecastCell.xib */; };
 		5DC70BC829382AB600A75CDB /* HourlyForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BC629382AB600A75CDB /* HourlyForecastCell.swift */; };
 		5DC70BC929382AB600A75CDB /* HourlyForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC70BC729382AB600A75CDB /* HourlyForecastCell.xib */; };
 		5DC70BCC2938C99E00A75CDB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BCB2938C99E00A75CDB /* NetworkManager.swift */; };
 		5DC70BCE293A101B00A75CDB /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BCD293A101B00A75CDB /* WeatherResponse.swift */; };
 		5DC70BD0293A177200A75CDB /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BCF293A177200A75CDB /* MainViewPresenter.swift */; };
+		5DC70BD3293A5C0600A75CDB /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */; };
+		5DC70BD4293A5C0600A75CDB /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,13 +31,13 @@
 		5DC167502937FA28000B49E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5DC70BBC2938052800A75CDB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		5DC70BBD2938052800A75CDB /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		5DC70BC229382A9C00A75CDB /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
-		5DC70BC329382A9C00A75CDB /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
 		5DC70BC629382AB600A75CDB /* HourlyForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastCell.swift; sourceTree = "<group>"; };
 		5DC70BC729382AB600A75CDB /* HourlyForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyForecastCell.xib; sourceTree = "<group>"; };
 		5DC70BCB2938C99E00A75CDB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5DC70BCD293A101B00A75CDB /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		5DC70BCF293A177200A75CDB /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
+		5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
+		5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +145,8 @@
 		5DC70BC029382A6800A75CDB /* ForecastCell */ = {
 			isa = PBXGroup;
 			children = (
-				5DC70BC229382A9C00A75CDB /* ForecastCell.swift */,
-				5DC70BC329382A9C00A75CDB /* ForecastCell.xib */,
+				5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */,
+				5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */,
 			);
 			path = ForecastCell;
 			sourceTree = "<group>";
@@ -226,9 +226,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5DC70BC529382A9C00A75CDB /* ForecastCell.xib in Resources */,
 				5DC1674F2937FA28000B49E7 /* LaunchScreen.storyboard in Resources */,
 				5DC70BBF2938052800A75CDB /* MainViewController.xib in Resources */,
+				5DC70BD4293A5C0600A75CDB /* ForecastCell.xib in Resources */,
 				5DC70BC929382AB600A75CDB /* HourlyForecastCell.xib in Resources */,
 				5DC1674C2937FA28000B49E7 /* Assets.xcassets in Resources */,
 			);
@@ -242,10 +242,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DC70BCC2938C99E00A75CDB /* NetworkManager.swift in Sources */,
-				5DC70BC429382A9C00A75CDB /* ForecastCell.swift in Sources */,
 				5DC70BD0293A177200A75CDB /* MainViewPresenter.swift in Sources */,
 				5DC70BC829382AB600A75CDB /* HourlyForecastCell.swift in Sources */,
 				5DC70BCE293A101B00A75CDB /* WeatherResponse.swift in Sources */,
+				5DC70BD3293A5C0600A75CDB /* ForecastCell.swift in Sources */,
 				5DC70BBE2938052800A75CDB /* MainViewController.swift in Sources */,
 				5DC167432937FA27000B49E7 /* AppDelegate.swift in Sources */,
 				5DC167452937FA27000B49E7 /* SceneDelegate.swift in Sources */,

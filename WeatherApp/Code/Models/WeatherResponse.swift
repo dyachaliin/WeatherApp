@@ -59,8 +59,61 @@ struct Current: Codable {
 
 // MARK: - Condition
 struct Condition: Codable {
-    let text, icon: String
+    let day, night: Text
+    let icon: String
     let code: Int
+}
+
+enum Text: String, Codable {
+    case clear = "Clear"
+    case sunny = "Sunny"
+    case cloudy = "Cloudy"
+    case patchySnowPossible = "Patchy snow possible"
+    case atchySleetPossible = "Patchy sleet possible"
+    case patchyFreezingDrizzlePossible = "Patchy freezing drizzle possible"
+    case FreezingDrizzle = "Freezing drizzle"
+    case thunderyOutbreaksPossible = "Thundery outbreaks possible"
+    case heavyFreezingDrizzle = "Heavy freezing drizzle"
+    case blowingSnow = "Blowing snow"
+    case blizzard = "Blizzard"
+    case fog = "Fog"
+    case freezingFog = "Freezing fog"
+    case patchyLightDrizzle = "Patchy light drizzle"
+    case lightDrizzle = "Light drizzle"
+    case lightRain = "Light rain"
+    case lightRainShower = "Light rain shower"
+    case mist = "Mist"
+    case heavyRainAtTimes = "Heavy rain at times"
+    case moderateOrHeavyRainWithThunder = "Moderate or heavy rain with thunder"
+    case lightFreezingRain = "Light freezing rain"
+    case moderateOrHeavyFreezingRain = "Moderate or heavy freezing rain"
+    case moderateOrHeavySleet = "Moderate or heavy sleet"
+    case lightSleet = "Light sleet"
+    case moderateRain = "Moderate rain"
+    case moderateRainAtTimes = "Moderate rain at times"
+    case overcast = "Overcast"
+    case partlyCloudy = "Partly cloudy"
+    case patchyRainPossible = "Patchy rain possible"
+    case heavyRain = "Heavy rain"
+    case pathcyLightRain = "Patchy light rain"
+    case patchyLightSnow = "Patchy light snow"
+    case lightSnow = "Light snow"
+    case patchyModerateSnow = "Patchy moderate snow"
+    case moderateSnow = "Moderate snow"
+    case patchyHeavySnow = "Patchy heavy snow"
+    case heavySnow = "Heavy snow"
+    case icePellets = "Ice pellets"
+    case moderateOrHeavyRainShower = "Moderate or heavy rain shower"
+    case torrentialRainShower = "Torrential rain shower"
+    case lightSleetShowers = "Light sleet showers"
+    case moderateOrHeavySleetShowers = "Moderate or heavy sleet showers"
+    case lightSnowShowers = "Light snow showers"
+    case moderateOrHeavySnowShowers = "Moderate or heavy snow showers"
+    case lightShowersOfIcePellets = "Light showers of ice pellets"
+    case moderateOrHeavyShowersOfIcePellets = "Moderate or heavy showers of ice pellets"
+    case patchyLightRainWithThunder = "Patchy light rain with thunder"
+    case patchyLightSnowWithThunder = "Patchy light snow with thunder"
+    case moderateOrHeavySnowWithThunder = "Moderate or heavy snow with thunder"
 }
 
 // MARK: - Forecast
@@ -146,7 +199,8 @@ struct Hour: Codable {
     let feelslikeC, feelslikeF, windchillC, windchillF: Double
     let heatindexC, heatindexF, dewpointC, dewpointF: Double
     let willItRain, chanceOfRain, willItSnow, chanceOfSnow: Int
-    let visKM, visMiles: Int
+    let visKM: Double
+    let visMiles: Int
     let gustMph, gustKph: Double
     let uv: Int
 
