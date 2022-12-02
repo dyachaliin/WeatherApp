@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class NetworkManager {
     
@@ -49,7 +50,15 @@ class NetworkManager {
         }.resume()
     }
     
-    func obtainPicture(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        urlSession.dataTask(with: url, completionHandler: completion).resume()
+    func obtainPicture(from url: URL, completion: @escaping (Data?, Error?) -> ()) {
+        AF.request(url, method: .get).response{ response in
+          switch response.result {
+           case .success(let responseData):
+              completion(responseData, nil)
+           case .failure(let error):
+              print("error:", error.localizedDescription)
+              completion(nil, error)
+           }
+       }
     }
 }

@@ -28,17 +28,16 @@ class ForecastCell: UITableViewCell {
     }
     
     func configure(with model: Forecastday) {
+        getPicture(from: model.day.condition.icon)
         dayLabel.text = getWeekDay(from: model.date)
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
-
-        getPicture(from: model.day.condition.icon)
     }
     
     func getPicture(from url: String) {
         guard let url = URL(string: "https:\(url)") else { return }
-        NetworkManager.shared.obtainPicture(from: url) { data, response, error in
+        NetworkManager.shared.obtainPicture(from: url) { data, error in
             guard let data = data, error == nil else { return }
-            
+
             DispatchQueue.main.async() { [weak self] in
                 self?.weatherIcon.image = UIImage(data: data)
             }
@@ -51,7 +50,6 @@ class ForecastCell: UITableViewCell {
         guard let date = dateFormatter.date(from: date) else { return "" }
         dateFormatter.dateFormat = "E"
         let dayOfTheWeekString = dateFormatter.string(from: date)
-//        print(dayOfTheWeekString)
         return dayOfTheWeekString
     }
     
