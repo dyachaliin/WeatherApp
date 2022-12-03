@@ -64,10 +64,12 @@ class MainViewController: UIViewController {
         
         presenter.getCoordinates(latitude: latitude, longitude: longitude)
         presenter.obtainWeatherResults()
+        print(latitude)
+        print(longitude)
     }
     
     func setFirstRowSelected() {
-        let indexPath = IndexPath(row: 0, section: 0)
+        let indexPath = IndexPath(row: 0, section: forecastTableView.numberOfSections - 1)
         forecastTableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
         forecastTableView.delegate?.tableView?(forecastTableView, didSelectRowAt: indexPath)
     }
@@ -113,20 +115,25 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let model = presenter.weatherModel(at: indexPath.row), let current = presenter.current else { return }
+        guard let model = presenter.weatherModel(at: indexPath.row) else { return }
         currentLocationLabel.text = presenter.location
         dateLabel.text = "\(model.date.getWeekDay().uppercased()), \(model.date.getDate())"
         presenter.getPicture(from: model.day.condition.icon)
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
         humidityLabel.text = "\(model.day.avghumidity)%"
-        windLabel.text = "\(current.windKph)km/h"
-        windDirectionImage.image = WindDirection(rawValue: current.windDir)?.image
+        windLabel.text = "\(model.day.maxwindKph)km/h"
+        windDirectionImage.image = WindDirection(rawValue: model.hour[model.hour.count / 2].windDir)?.image
     }
     
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        
-    }
+//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+//        if selectedTags.count < 3 {
+//            return indexPath
+//        } else {
+//            if selectedTags.contains(tags[indexPath.row]) { return indexPath }
+//            self.animateHeaderLabel()
+//            return nil
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Constants.rowHeight
