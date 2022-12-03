@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum WindDirection {
-    case north, northwest, west, southwest, south, southeast, east, northeast
-}
-
 // MARK: - WeatherResponse
 struct WeatherResponse: Codable {
     let location: Location

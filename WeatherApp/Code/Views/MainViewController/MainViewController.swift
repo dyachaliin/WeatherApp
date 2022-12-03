@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var windLabel: UILabel!
+    @IBOutlet weak var windDirectionImage: UIImageView!
     
     private let presenter: MainViewPresenter = MainViewPresenter()
     
@@ -32,7 +33,6 @@ class MainViewController: UIViewController {
         
         forecastTableView.delegate = self
         forecastTableView.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +43,7 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLocation()
+        view.showLoadingView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,12 +64,12 @@ class MainViewController: UIViewController {
         
         presenter.getCoordinates(latitude: latitude, longitude: longitude)
         presenter.obtainWeatherResults()
-        print(latitude)
-        print(longitude)
     }
     
-    func getWindDirection() {
-        
+    func setFirstRowSelected() {
+        let indexPath = IndexPath(row: 0, section: 0)
+        forecastTableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
+        forecastTableView.delegate?.tableView?(forecastTableView, didSelectRowAt: indexPath)
     }
     
 }
@@ -80,6 +81,8 @@ extension MainViewController: MainViewDelegate {
     
     func updateTableView() {
         forecastTableView.reloadData()
+        setFirstRowSelected()
+        view.removeLoadingView()
     }
 }
 
@@ -109,18 +112,15 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        tableView.desele
-//        return indexPath
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let model = presenter.weatherModel(at: indexPath.row) else { return }
+        guard let model = presenter.weatherModel(at: indexPath.row), let current = presenter.current else { return }
         currentLocationLabel.text = presenter.location
         dateLabel.text = "\(model.date.getWeekDay().uppercased()), \(model.date.getDate())"
         presenter.getPicture(from: model.day.condition.icon)
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
         humidityLabel.text = "\(model.day.avghumidity)%"
+        windLabel.text = "\(current.windKph)km/h"
+        windDirectionImage.image = WindDirection(rawValue: current.windDir)?.image
     }
     
     

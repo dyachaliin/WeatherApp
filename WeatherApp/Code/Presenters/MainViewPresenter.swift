@@ -19,6 +19,7 @@ class MainViewPresenter {
     private var latitude: Float?
     private var longitude: Float?
     private(set) var location: String?
+    private(set) var current: Current?
     
     private(set) var models = [Forecastday]()
     
@@ -50,6 +51,7 @@ class MainViewPresenter {
                     let dailyForecasts = result.forecast.forecastday
                     self?.models.append(contentsOf: dailyForecasts)
                     self?.location = result.location.name
+                    self?.current = result.current
                     
                     DispatchQueue.main.async {
                         self?.mainViewDelegate?.updateTableView()
