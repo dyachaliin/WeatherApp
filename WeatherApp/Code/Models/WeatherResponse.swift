@@ -16,19 +16,19 @@ struct WeatherResponse: Codable {
 
 // MARK: - Current
 struct Current: Codable {
-    let lastUpdatedEpoch: Int
+    let lastUpdatedEpoch: Double
     let lastUpdated: String
     let tempC, tempF: Double
-    let isDay: Int
+    let isDay: Double
     let condition: Condition
     let windMph, windKph: Double
-    let windDegree: Int
+    let windDegree: Double
     let windDir: String
-    let pressureMB: Int
+    let pressureMB: Double
     let pressureIn: Double
-    let precipMm, precipIn, humidity, cloud: Int
+    let precipMm, precipIn, humidity, cloud: Double
     let feelslikeC, feelslikeF: Double
-    let visKM, visMiles, uv: Int
+    let visKM, visMiles, uv: Double
     let gustMph, gustKph: Double
 
     enum CodingKeys: String, CodingKey {
@@ -124,7 +124,7 @@ struct Forecast: Codable {
 // MARK: - Forecastday
 struct Forecastday: Codable {
     let date: String
-    let dateEpoch: Int
+    let dateEpoch: Double
     let day: Day
     let astro: Astro
     let hour: [Hour]
@@ -155,10 +155,10 @@ struct Day: Codable {
     let totalprecipMm, totalprecipIn: Double
     let totalsnowCM: Double
     let avgvisKM: Double
-    let avgvisMiles, avghumidity, dailyWillItRain, dailyChanceOfRain: Int
-    let dailyWillItSnow, dailyChanceOfSnow: Int
+    let avgvisMiles, avghumidity, dailyWillItRain, dailyChanceOfRain: Double
+    let dailyWillItSnow, dailyChanceOfSnow: Double
     let condition: Condition
-    let uv: Int
+    let uv: Double
 
     enum CodingKeys: String, CodingKey {
         case maxtempC = "maxtemp_c"
@@ -185,24 +185,24 @@ struct Day: Codable {
 
 // MARK: - Hour
 struct Hour: Codable {
-    let timeEpoch: Int
+    let timeEpoch: Double
     let time: String
     let tempC, tempF: Double
     let isDay: Int
     let condition: Condition
     let windMph, windKph: Double
-    let windDegree: Int
+    let windDegree: Double
     let windDir: String
-    let pressureMB: Int
+    let pressureMB: Double
     let pressureIn, precipMm, precipIn: Double
-    let humidity, cloud: Int
+    let humidity, cloud: Double
     let feelslikeC, feelslikeF, windchillC, windchillF: Double
     let heatindexC, heatindexF, dewpointC, dewpointF: Double
-    let willItRain, chanceOfRain, willItSnow, chanceOfSnow: Int
+    let willItRain, chanceOfRain, willItSnow, chanceOfSnow: Double
     let visKM: Double
-    let visMiles: Int
+    let visMiles: Double
     let gustMph, gustKph: Double
-    let uv: Int
+    let uv: Double
 
     enum CodingKeys: String, CodingKey {
         case timeEpoch = "time_epoch"
@@ -245,7 +245,7 @@ struct Location: Codable {
     let name, region, country: String
     let lat, lon: Double
     let tzID: String
-    let localtimeEpoch: Int
+    let localtimeEpoch: Double
     let localtime: String
 
     enum CodingKeys: String, CodingKey {

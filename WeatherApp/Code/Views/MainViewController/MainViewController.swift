@@ -64,8 +64,8 @@ class MainViewController: UIViewController {
         
         presenter.getCoordinates(latitude: latitude, longitude: longitude)
         presenter.obtainWeatherResults()
-        print(latitude)
-        print(longitude)
+//        print(latitude)
+//        print(longitude)
     }
     
     func setFirstRowSelected() {
@@ -124,16 +124,6 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
         windLabel.text = "\(model.day.maxwindKph)km/h"
         windDirectionImage.image = WindDirection(rawValue: model.hour[model.hour.count / 2].windDir)?.image
     }
-    
-//    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-//        if selectedTags.count < 3 {
-//            return indexPath
-//        } else {
-//            if selectedTags.contains(tags[indexPath.row]) { return indexPath }
-//            self.animateHeaderLabel()
-//            return nil
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return Constants.rowHeight
