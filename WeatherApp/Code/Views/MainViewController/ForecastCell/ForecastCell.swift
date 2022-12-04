@@ -36,9 +36,7 @@ class ForecastCell: UITableViewCell {
         } else {
             dayLabel.textColor = .black
             temperatureLabel.textColor = .black
-            
             shadowView.layer.shadowRadius = 0
-            
         }
     }
     
@@ -57,14 +55,6 @@ class ForecastCell: UITableViewCell {
                 self?.weatherIcon.image = UIImage(data: data)
             }
         }
-    }
-    
-    private func makeTextPower(from string: String) -> NSMutableAttributedString {
-        let font:UIFont? = UIFont(name: "Helvetica", size: 20)
-        let fontSuper: UIFont? = UIFont(name: "Helvetica", size: 10)
-        let attString: NSMutableAttributedString = NSMutableAttributedString(string: string, attributes: [.font: font!])
-        attString.setAttributes([.font: fontSuper!, .baselineOffset:10], range: NSRange(location: string.count - 1, length: 1))
-        return attString
     }
     
 }

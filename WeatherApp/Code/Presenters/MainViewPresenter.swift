@@ -21,6 +21,7 @@ class MainViewPresenter {
     private(set) var location: String?
     
     private(set) var models = [Forecastday]()
+    private(set) var selectedHourlyModels = [Hour]()
     
     func setViewDelegate(mainViewDelegate: MainViewDelegate?){
         self.mainViewDelegate = mainViewDelegate
@@ -39,7 +40,11 @@ class MainViewPresenter {
         self.longitude = longitude
     }
     
-   
+    func setHourlyModels(from index: Int) {
+        self.selectedHourlyModels = models[index].hour
+    }
+    
+    
     func obtainWeatherResults() {
         guard let latitude = latitude, let longitude = longitude else { return }
         
@@ -54,7 +59,7 @@ class MainViewPresenter {
                     DispatchQueue.main.async {
                         self?.mainViewDelegate?.updateTableView()
                     }
-                   
+                    
                 case .failure(let error):
                     print(String(describing: error))
                 }
@@ -68,7 +73,7 @@ class MainViewPresenter {
         guard let url = URL(string: "https:\(url)") else { return }
         NetworkManager.shared.obtainPicture(from: url) { data, error in
             guard let data = data, error == nil else { return }
-
+            
             DispatchQueue.main.async() { [weak self] in
                 self?.mainViewDelegate?.updateImage(with: data)
             }

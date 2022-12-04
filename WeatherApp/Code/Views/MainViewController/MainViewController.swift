@@ -64,8 +64,6 @@ class MainViewController: UIViewController {
         
         presenter.getCoordinates(latitude: latitude, longitude: longitude)
         presenter.obtainWeatherResults()
-//        print(latitude)
-//        print(longitude)
     }
     
     func setFirstRowSelected() {
@@ -84,6 +82,7 @@ extension MainViewController: MainViewDelegate {
     func updateTableView() {
         forecastTableView.reloadData()
         setFirstRowSelected()
+        presenter.setHourlyModels(from: 0)
         view.removeLoadingView()
     }
 }
@@ -101,21 +100,39 @@ extension MainViewController: CLLocationManagerDelegate {
 }
 
 extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        presenter.numberOfWeatherItems()
+        if section == 0 {
+            return 1
+        } else {
+            return presenter.numberOfWeatherItems()
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: ForecastCell.identifier, for: indexPath) as? ForecastCell, let model = presenter.weatherModel(at: indexPath.row) {
-            cell.configure(with: model)
-            cell.selectionStyle = .none
-            return cell
+        if indexPath.section == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: HourlyForecastCell.identifier, for: indexPath) as? HourlyForecastCell {
+                cell.configure(with: presenter.selectedHourlyModels)
+                cell.selectionStyle = .none
+                return cell
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ForecastCell.identifier, for: indexPath) as? ForecastCell, let model = presenter.weatherModel(at: indexPath.row) {
+                cell.configure(with: model)
+                cell.selectionStyle = .none
+                return cell
+            }
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let model = presenter.weatherModel(at: indexPath.row) else { return }
+        
         currentLocationLabel.text = presenter.location
         dateLabel.text = "\(model.date.getWeekDay().uppercased()), \(model.date.getDate())"
         presenter.getPicture(from: model.day.condition.icon)
@@ -123,10 +140,23 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
         humidityLabel.text = "\(model.day.avghumidity)%"
         windLabel.text = "\(model.day.maxwindKph)km/h"
         windDirectionImage.image = WindDirection(rawValue: model.hour[model.hour.count / 2].windDir)?.image
+        
+        presenter.setHourlyModels(from: indexPath.row)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constants.rowHeight
+        if indexPath.section == 0 {
+            return Constants.collectionCellSize.height
+        } else {
+            return Constants.rowHeight
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y < 0 {
+            scrollView.contentOffset.y = 0
+        }
     }
     
 }
