@@ -76,8 +76,7 @@ class MainViewController: UIViewController {
     
     @IBAction func toSearchController(_ sender: UIButton) {
         let vc = SearchViewController()
-//        vc.modalPresentationStyle = .overFullScreen
-//        navigationController?.present(vc, animated: true)
+        vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -93,6 +92,13 @@ extension MainViewController: MainViewDelegate {
         setFirstRowSelected()
         presenter.setHourlyModels(from: 0)
         view.removeLoadingView()
+    }
+}
+
+extension MainViewController: SearchViewControllerDelegate {
+    func getCoordinate(coordinate: CLLocationCoordinate2D) {
+        currentLocation = CLLocation(latitude: coordinate.latitude, longitude:  coordinate.longitude)
+        self.requestWeatherForLocation()
     }
 }
 

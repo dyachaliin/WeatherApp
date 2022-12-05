@@ -7,10 +7,17 @@
 
 import Foundation
 import UIKit
+import CoreLocation
+
+protocol SearchViewControllerDelegate: AnyObject {
+    func getCoordinate(coordinate: CLLocationCoordinate2D)
+}
 
 class SearchViewController: UIViewController, UISearchResultsUpdating {
     
     private let searchVC = UISearchController(searchResultsController: ResultsViewController())
+    
+    weak var delegate: SearchViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +36,32 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     }
     
     func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text, !query.trimmingCharacters(in: .whitespaces).isEmpty, let resultVC = searchController.searchResultsController as? ResultsViewController else { return }
         
+        resultVC.delegate = self
+        
+        GooglePlacesManager.shared.findPlaces(query: query) { result in
+            switch result {
+            case .success(let places):
+                DispatchQueue.main.async {
+                    resultVC.update(with: places)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     @objc func backTapped () {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension SearchViewController: ResultsViewControllerDelegate {
+    func didTapPlace(with coordinate: CLLocationCoordinate2D) {
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
+            self?.delegate?.getCoordinate(coordinate: coordinate)
+        }
     }
 }

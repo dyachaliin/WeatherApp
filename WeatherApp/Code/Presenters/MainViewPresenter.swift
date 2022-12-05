@@ -53,7 +53,7 @@ class MainViewPresenter {
                 switch result {
                 case .success(let result):
                     let dailyForecasts = result.forecast.forecastday
-                    self?.models.append(contentsOf: dailyForecasts)
+                    self?.models = dailyForecasts
                     self?.location = result.location.name
                     
                     DispatchQueue.main.async {

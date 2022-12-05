@@ -10,4 +10,5 @@ import Foundation
 enum Constants {
     static let rowHeight: CGFloat = 60
     static let collectionCellSize: CGSize = CGSize(width: 100, height: 150)
+    static let apiKey: String = "AIzaSyBByxovjOz93XkMnjcDr-rJhp8wSrO7YhQ"
 }

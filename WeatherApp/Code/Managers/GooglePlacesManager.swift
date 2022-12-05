@@ -7,6 +7,7 @@
 
 import Foundation
 import GooglePlaces
+import CoreLocation
 
 struct Place {
     let name: String
@@ -22,10 +23,7 @@ final class GooglePlacesManager {
     
     enum PlacesError: Error {
         case failedToFind
-    }
-    
-    public func setup() {
-        GMSPlacesClient.provideAPIKey("AIzaSyBByxovjOz93XkMnjcDr-rJhp8wSrO7YhQ")
+        case failedToGetCoordinates
     }
     
     public func findPlaces(
@@ -48,4 +46,21 @@ final class GooglePlacesManager {
                     completion(.success(places))
                 }
         }
+    
+    public func resolveLocation(for place: Place, completion: @escaping (Result<CLLocationCoordinate2D, Error>) -> Void) {
+        client.fetchPlace(
+            fromPlaceID: place.id,
+            placeFields: .coordinate,
+            sessionToken: nil
+        ) { googlePlace, error in
+            guard let googlePlace = googlePlace, error == nil else {
+                completion(.failure(PlacesError.failedToGetCoordinates))
+                return
+            }
+            let googleCoordinate = googlePlace.coordinate
+            let coordinate = CLLocationCoordinate2D(latitude: googleCoordinate.latitude, longitude: googleCoordinate.longitude)
+            
+            completion(.success(coordinate))
+        }
+    }
 }
