@@ -11,7 +11,7 @@ import CoreLocation
 class MainViewController: UIViewController {
     
     @IBOutlet weak var forecastTableView: UITableView!
-    @IBOutlet weak var currentLocationLabel: UILabel!
+    @IBOutlet weak var currentLocationButton: UIButton!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var conditionImage: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -43,12 +43,12 @@ class MainViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         setupLocation()
-        view.showLoadingView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    
     }
     
     func setupLocation() {
@@ -63,6 +63,7 @@ class MainViewController: UIViewController {
         let latitude = Float(currentLocation.coordinate.latitude)
         
         presenter.getCoordinates(latitude: latitude, longitude: longitude)
+        view.showLoadingView()
         presenter.obtainWeatherResults()
     }
     
@@ -70,6 +71,14 @@ class MainViewController: UIViewController {
         let indexPath = IndexPath(row: 0, section: forecastTableView.numberOfSections - 1)
         forecastTableView.selectRow(at: indexPath, animated: true, scrollPosition: .bottom)
         forecastTableView.delegate?.tableView?(forecastTableView, didSelectRowAt: indexPath)
+    }
+    
+    
+    @IBAction func toSearchController(_ sender: UIButton) {
+        let vc = SearchViewController()
+//        vc.modalPresentationStyle = .overFullScreen
+//        navigationController?.present(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
@@ -133,7 +142,7 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let model = presenter.weatherModel(at: indexPath.row) else { return }
         
-        currentLocationLabel.text = presenter.location
+        currentLocationButton.setTitle(presenter.location, for: .normal)
         dateLabel.text = "\(model.date.getWeekDay().uppercased()), \(model.date.getDate())"
         presenter.getPicture(from: model.day.condition.icon)
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"

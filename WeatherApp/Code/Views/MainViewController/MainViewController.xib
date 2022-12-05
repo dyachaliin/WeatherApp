@@ -11,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="WeatherApp" customModuleProvider="target">
             <connections>
                 <outlet property="conditionImage" destination="0FH-r7-5rl" id="rdp-bp-9kG"/>
-                <outlet property="currentLocationLabel" destination="e8x-ry-BQo" id="ABq-uU-Pfm"/>
+                <outlet property="currentLocationButton" destination="JA7-ne-Ue8" id="RFO-ad-lQI"/>
                 <outlet property="dateLabel" destination="w3x-fA-3HP" id="i6B-TI-T3u"/>
                 <outlet property="forecastTableView" destination="SPy-gY-SwR" id="HQF-bR-8Qc"/>
                 <outlet property="humidityLabel" destination="716-Ex-uCx" id="sRn-v1-2JR"/>
@@ -26,24 +26,27 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="1Nv-oR-OS0">
-                    <rect key="frame" x="20" y="79" width="85" height="25"/>
-                    <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_place" translatesAutoresizingMaskIntoConstraints="NO" id="SFO-K3-1Ch">
-                            <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="25" id="72N-En-yXu"/>
-                                <constraint firstAttribute="width" constant="25" id="tik-7C-W3o"/>
-                            </constraints>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-ry-BQo">
-                            <rect key="frame" x="35" y="0.0" width="50" height="25"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                </stackView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_place" translatesAutoresizingMaskIntoConstraints="NO" id="SFO-K3-1Ch">
+                    <rect key="frame" x="20" y="79" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="72N-En-yXu"/>
+                        <constraint firstAttribute="width" constant="25" id="tik-7C-W3o"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JA7-ne-Ue8">
+                    <rect key="frame" x="45" y="66.666666666666671" width="150" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="2yS-Uf-w7l"/>
+                        <constraint firstAttribute="height" constant="50" id="JKs-VN-ech"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button">
+                        <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="toSearchController:" destination="-1" eventType="touchUpInside" id="hkt-ac-TH2"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MNw-Fj-Xie">
                     <rect key="frame" x="323" y="66.666666666666671" width="50" height="50"/>
                     <constraints>
@@ -151,17 +154,19 @@
             <color key="backgroundColor" name="blue"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="MNw-Fj-Xie" secondAttribute="trailing" constant="20" id="6gT-zO-Eoe"/>
-                <constraint firstItem="MNw-Fj-Xie" firstAttribute="centerY" secondItem="1Nv-oR-OS0" secondAttribute="centerY" id="8MC-LH-aM7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SPy-gY-SwR" secondAttribute="trailing" id="8ji-XU-72w"/>
-                <constraint firstItem="1Nv-oR-OS0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="Bel-ak-BoA"/>
                 <constraint firstItem="SPy-gY-SwR" firstAttribute="top" secondItem="z4j-iZ-X1L" secondAttribute="bottom" constant="10" id="EDz-hq-M1s"/>
                 <constraint firstAttribute="bottom" secondItem="SPy-gY-SwR" secondAttribute="bottom" id="Ev5-ax-ebA"/>
-                <constraint firstItem="w3x-fA-3HP" firstAttribute="top" secondItem="1Nv-oR-OS0" secondAttribute="bottom" constant="20" id="RTZ-pg-QOb"/>
+                <constraint firstItem="JA7-ne-Ue8" firstAttribute="leading" secondItem="SFO-K3-1Ch" secondAttribute="trailing" id="SH3-VS-KUL"/>
                 <constraint firstItem="SPy-gY-SwR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XIs-Fi-Pt4"/>
                 <constraint firstItem="z4j-iZ-X1L" firstAttribute="top" secondItem="w3x-fA-3HP" secondAttribute="bottom" constant="10" id="Ztc-8P-Gth"/>
+                <constraint firstItem="JA7-ne-Ue8" firstAttribute="centerY" secondItem="SFO-K3-1Ch" secondAttribute="centerY" id="fLA-L7-t2U"/>
+                <constraint firstItem="w3x-fA-3HP" firstAttribute="top" secondItem="SFO-K3-1Ch" secondAttribute="bottom" constant="20" id="hWC-Ru-l0E"/>
+                <constraint firstItem="SFO-K3-1Ch" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="hhX-a2-Y0e"/>
                 <constraint firstItem="z4j-iZ-X1L" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="iRT-Zq-RaN"/>
                 <constraint firstItem="w3x-fA-3HP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="jfq-mc-LV9"/>
-                <constraint firstItem="1Nv-oR-OS0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="r9w-hc-3Uj"/>
+                <constraint firstItem="SFO-K3-1Ch" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="luw-jS-Lf2"/>
+                <constraint firstItem="MNw-Fj-Xie" firstAttribute="centerY" secondItem="SFO-K3-1Ch" secondAttribute="centerY" id="o4B-qL-5pp"/>
             </constraints>
             <point key="canvasLocation" x="62" y="20"/>
         </view>

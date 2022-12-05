@@ -15,6 +15,10 @@
 		5DB0381D293B70BC0032D347 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB0381C293B70BC0032D347 /* Extensions+UIView.swift */; };
 		5DB03821293C03330032D347 /* HourlyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB0381F293C03330032D347 /* HourlyCollectionViewCell.swift */; };
 		5DB03822293C03330032D347 /* HourlyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DB03820293C03330032D347 /* HourlyCollectionViewCell.xib */; };
+		5DB03825293CB22D0032D347 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB03824293CB22D0032D347 /* SearchViewController.swift */; };
+		5DB03828293CB2B80032D347 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB03827293CB2B80032D347 /* MapViewController.swift */; };
+		5DB0382B293CB5930032D347 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB0382A293CB5930032D347 /* ResultsViewController.swift */; };
+		5DB03833293E04F60032D347 /* GooglePlacesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB03832293E04F60032D347 /* GooglePlacesManager.swift */; };
 		5DC167432937FA27000B49E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC167422937FA27000B49E7 /* AppDelegate.swift */; };
 		5DC167452937FA27000B49E7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC167442937FA27000B49E7 /* SceneDelegate.swift */; };
 		5DC1674C2937FA28000B49E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC1674B2937FA28000B49E7 /* Assets.xcassets */; };
@@ -39,6 +43,10 @@
 		5DB0381C293B70BC0032D347 /* Extensions+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		5DB0381F293C03330032D347 /* HourlyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyCollectionViewCell.swift; sourceTree = "<group>"; };
 		5DB03820293C03330032D347 /* HourlyCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HourlyCollectionViewCell.xib; sourceTree = "<group>"; };
+		5DB03824293CB22D0032D347 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		5DB03827293CB2B80032D347 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5DB0382A293CB5930032D347 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		5DB03832293E04F60032D347 /* GooglePlacesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesManager.swift; sourceTree = "<group>"; };
 		5DC1673F2937FA27000B49E7 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC167422937FA27000B49E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5DC167442937FA27000B49E7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -110,6 +118,31 @@
 				5DB03820293C03330032D347 /* HourlyCollectionViewCell.xib */,
 			);
 			path = HourlyCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		5DB03823293CB2160032D347 /* SearchViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5DB03829293CB5800032D347 /* ResultsViewController */,
+				5DB03824293CB22D0032D347 /* SearchViewController.swift */,
+			);
+			path = SearchViewController;
+			sourceTree = "<group>";
+		};
+		5DB03826293CB2970032D347 /* MapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5DB03827293CB2B80032D347 /* MapViewController.swift */,
+			);
+			path = MapViewController;
+			sourceTree = "<group>";
+		};
+		5DB03829293CB5800032D347 /* ResultsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5DB0382A293CB5930032D347 /* ResultsViewController.swift */,
+			);
+			path = ResultsViewController;
 			sourceTree = "<group>";
 		};
 		5DC167362937FA27000B49E7 = {
@@ -192,6 +225,8 @@
 		5DC1675B2937FC6C000B49E7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5DB03826293CB2970032D347 /* MapViewController */,
+				5DB03823293CB2160032D347 /* SearchViewController */,
 				5DB03819293B6FF20032D347 /* LoadingView */,
 				5DC70BBB293804EB00A75CDB /* MainViewController */,
 			);
@@ -232,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				5DC70BCB2938C99E00A75CDB /* NetworkManager.swift */,
+				5DB03832293E04F60032D347 /* GooglePlacesManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -265,6 +301,7 @@
 				5DC1673C2937FA27000B49E7 /* Frameworks */,
 				5DC1673D2937FA27000B49E7 /* Resources */,
 				07FD0435106820195F30EE43 /* [CP] Embed Pods Frameworks */,
+				59AF129FE1E1B2DDB4352749 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -342,6 +379,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeatherApp/Pods-WeatherApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		59AF129FE1E1B2DDB4352749 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeatherApp/Pods-WeatherApp-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WeatherApp/Pods-WeatherApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WeatherApp/Pods-WeatherApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DFE1A1574AC53B1204C46C1B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -371,12 +425,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DB03833293E04F60032D347 /* GooglePlacesManager.swift in Sources */,
+				5DB03825293CB22D0032D347 /* SearchViewController.swift in Sources */,
 				5DC70BCC2938C99E00A75CDB /* NetworkManager.swift in Sources */,
 				5DC70BD0293A177200A75CDB /* MainViewPresenter.swift in Sources */,
 				5DC70BC829382AB600A75CDB /* HourlyForecastCell.swift in Sources */,
 				5DC70BCE293A101B00A75CDB /* WeatherResponse.swift in Sources */,
 				5DB03815293AB1A20032D347 /* Extensions+String.swift in Sources */,
 				5DB0381D293B70BC0032D347 /* Extensions+UIView.swift in Sources */,
+				5DB0382B293CB5930032D347 /* ResultsViewController.swift in Sources */,
 				5DB0381B293B70000032D347 /* LoadingView.swift in Sources */,
 				5DB03821293C03330032D347 /* HourlyCollectionViewCell.swift in Sources */,
 				5DC70BD3293A5C0600A75CDB /* ForecastCell.swift in Sources */,
@@ -385,6 +442,7 @@
 				5DB03818293B63180032D347 /* WindDirection.swift in Sources */,
 				5DC167452937FA27000B49E7 /* SceneDelegate.swift in Sources */,
 				5DB03810293A80B80032D347 /* Constants.swift in Sources */,
+				5DB03828293CB2B80032D347 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
