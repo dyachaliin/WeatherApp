@@ -19,9 +19,17 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     
     weak var delegate: SearchViewControllerDelegate?
     
+    private var contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.backgroundColor = .white
+        return contentView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.addSubview(contentView)
+        view.backgroundColor = UIColor(named: "blue")
         navigationController?.navigationBar.backgroundColor = UIColor(named: "blue")
         
         searchVC.searchResultsUpdater = self
@@ -33,6 +41,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
+        addConstraints()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -54,6 +63,19 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     
     @objc func backTapped () {
         navigationController?.popViewController(animated: true)
+    }
+    
+    func addConstraints() {
+        var constraints = [NSLayoutConstraint]()
+        
+        let guide = view.safeAreaLayoutGuide
+        
+        constraints.append(contentView.topAnchor.constraint(equalTo: guide.topAnchor))
+        constraints.append(contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor))
+        constraints.append(contentView.leadingAnchor.constraint(equalTo: guide.leadingAnchor))
+        constraints.append(contentView.trailingAnchor.constraint(equalTo: guide.trailingAnchor))
+        
+        NSLayoutConstraint.activate(constraints)
     }
 }
 

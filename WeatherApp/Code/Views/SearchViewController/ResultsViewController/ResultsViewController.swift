@@ -18,6 +18,8 @@ class ResultsViewController: UIViewController {
     
     private let tableview: UITableView = {
         let tableview = UITableView()
+        tableview.backgroundColor = .clear
+        tableview.separatorStyle = .none
         tableview.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         return tableview
     }()
@@ -53,6 +55,8 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = places[indexPath.row].name
+        cell.backgroundColor = .clear
+        cell.textLabel?.textColor = .black
         return cell
     }
     
