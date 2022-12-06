@@ -33,6 +33,7 @@
 		5DC70BD3293A5C0600A75CDB /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */; };
 		5DC70BD4293A5C0600A75CDB /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */; };
 		5DD45BA2293F47ED00B8150F /* MapViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD45BA1293F47ED00B8150F /* MapViewPresenter.swift */; };
+		5DD45BA4293F7BF600B8150F /* DependencyInjectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD45BA3293F7BF600B8150F /* DependencyInjectionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
 		5DD45BA1293F47ED00B8150F /* MapViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewPresenter.swift; sourceTree = "<group>"; };
+		5DD45BA3293F7BF600B8150F /* DependencyInjectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectionManager.swift; sourceTree = "<group>"; };
 		78028143D61FD42388C3B38A /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E6F4EDE74CF21ED8DBD96700 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -271,6 +273,7 @@
 			children = (
 				5DC70BCB2938C99E00A75CDB /* NetworkManager.swift */,
 				5DB03832293E04F60032D347 /* GooglePlacesManager.swift */,
+				5DD45BA3293F7BF600B8150F /* DependencyInjectionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DD45BA4293F7BF600B8150F /* DependencyInjectionManager.swift in Sources */,
 				5DB03833293E04F60032D347 /* GooglePlacesManager.swift in Sources */,
 				5DB03825293CB22D0032D347 /* SearchViewController.swift in Sources */,
 				5DD45BA2293F47ED00B8150F /* MapViewPresenter.swift in Sources */,

@@ -41,19 +41,13 @@ class ForecastCell: UITableViewCell {
     }
     
     func configure(with model: Forecastday) {
-        getPicture(from: model.day.condition.icon)
         dayLabel.text = model.date.getWeekDay().uppercased()
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
     }
     
-    func getPicture(from url: String) {
-        guard let url = URL(string: "https:\(url)") else { return }
-        NetworkManager.shared.obtainPicture(from: url) { data, error in
-            guard let data = data, error == nil else { return }
-            
-            DispatchQueue.main.async() { [weak self] in
-                self?.weatherIcon.image = UIImage(data: data)
-            }
+    func getPicture(from data: Data) {
+        DispatchQueue.main.async() { [weak self] in
+            self?.weatherIcon.image = UIImage(data: data)
         }
     }
     

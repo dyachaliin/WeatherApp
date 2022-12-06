@@ -8,6 +8,11 @@
 import Foundation
 import Alamofire
 
+protocol DataFetchable {
+    func obtainWeatherResults(latitude: Float, longitude: Float, completion: @escaping (Result<WeatherResponse, Error>) -> Void) throws
+    func obtainPicture(from url: URL, completion: @escaping (Data?, Error?) -> ())
+}
+
 extension NetworkManager: DataFetchable {}
 
 final class NetworkManager {
@@ -54,13 +59,13 @@ final class NetworkManager {
     
     func obtainPicture(from url: URL, completion: @escaping (Data?, Error?) -> ()) {
         AF.request(url, method: .get).response{ response in
-          switch response.result {
-           case .success(let responseData):
-              completion(responseData, nil)
-           case .failure(let error):
-              print("error:", error.localizedDescription)
-              completion(nil, error)
-           }
-       }
+            switch response.result {
+            case .success(let responseData):
+                completion(responseData, nil)
+            case .failure(let error):
+                print("error:", error.localizedDescription)
+                completion(nil, error)
+            }
+        }
     }
 }

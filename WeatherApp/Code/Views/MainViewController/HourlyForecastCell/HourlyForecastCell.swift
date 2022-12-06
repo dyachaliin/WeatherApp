@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HourlyForecastCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HourlyForecastCell: UITableViewCell {
     
     static let identifier = String(describing: HourlyForecastCell.self)
     
@@ -31,6 +31,18 @@ class HourlyForecastCell: UITableViewCell, UICollectionViewDelegate, UICollectio
         collectionView.reloadData()
     }
     
+    func getPicture(from url: String, completion: @escaping (Data) -> Void) {
+        guard let url = URL(string: "https:\(url)") else { return }
+        NetworkManager.shared.obtainPicture(from: url) { data, error in
+            guard let data = data, error == nil else { return }
+            completion(data)
+        }
+    }
+    
+}
+
+extension HourlyForecastCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return Constants.collectionCellSize
     }
@@ -41,7 +53,13 @@ class HourlyForecastCell: UITableViewCell, UICollectionViewDelegate, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HourlyCollectionViewCell.identifier, for: indexPath) as! HourlyCollectionViewCell
-        cell.configure(with: models[indexPath.row])
+        let model = models[indexPath.row]
+        
+        getPicture(from: model.condition.icon) { data in
+            cell.getPicture(from: data)
+        }
+        
+        cell.configure(with: model)
         return cell
     }
 }

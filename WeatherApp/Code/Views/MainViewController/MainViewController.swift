@@ -97,10 +97,6 @@ class MainViewController: UIViewController {
 }
 
 extension MainViewController: MainViewDelegate {
-    func updateImage(with data: Data) {
-        conditionImage.image = UIImage(data: data)
-    }
-    
     func updateTableView() {
         forecastTableView.reloadData()
         setFirstRowSelected()
@@ -133,7 +129,7 @@ extension MainViewController: CLLocationManagerDelegate {
     }
 }
 
-extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -157,6 +153,11 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
         } else {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ForecastCell.identifier, for: indexPath) as? ForecastCell, let model = presenter.weatherModel(at: indexPath.row) {
                 cell.configure(with: model)
+                
+                presenter.getPicture(from: model.day.condition.icon) { data in
+                    cell.getPicture(from: data)
+                }
+                
                 cell.selectionStyle = .none
                 return cell
             }
@@ -169,7 +170,13 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
         
         currentLocationButton.setTitle(presenter.location, for: .normal)
         dateLabel.text = "\(model.date.getWeekDay().uppercased()), \(model.date.getDate())"
-        presenter.getPicture(from: model.day.condition.icon)
+        
+        presenter.getPicture(from: model.day.condition.icon) { data in
+            DispatchQueue.main.async { [weak self] in
+                self?.conditionImage.image = UIImage(data: data)
+            }
+        }
+        
         temperatureLabel.text = "\(model.day.maxtempC)° / \(model.day.mintempC)°"
         humidityLabel.text = "\(model.day.avghumidity)%"
         windLabel.text = "\(model.day.maxwindKph)km/h"

@@ -22,5 +22,3 @@ class MapViewPresenter: MapViewPresenterProtocol {
     
     init() {}
 }
-
-
