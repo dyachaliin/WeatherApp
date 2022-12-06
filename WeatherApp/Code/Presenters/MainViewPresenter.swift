@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol DataFetchable {
+    func obtainWeatherResults(latitude: Float, longitude: Float, completion: @escaping (Result<WeatherResponse, Error>) -> Void) throws
+    func obtainPicture(from url: URL, completion: @escaping (Data?, Error?) -> ())
+}
+
 protocol MainViewDelegate: NSObjectProtocol {
     func updateTableView()
     func updateImage(with data: Data)
@@ -15,6 +20,7 @@ protocol MainViewDelegate: NSObjectProtocol {
 class MainViewPresenter {
     
     weak private var mainViewDelegate: MainViewDelegate?
+    private var dataFetchable: DataFetchable
     
     private var latitude: Float?
     private var longitude: Float?
@@ -22,6 +28,10 @@ class MainViewPresenter {
     
     private(set) var models = [Forecastday]()
     private(set) var selectedHourlyModels = [Hour]()
+    
+    init(dataFetchable: DataFetchable) {
+        self.dataFetchable = dataFetchable
+    }
     
     func setViewDelegate(mainViewDelegate: MainViewDelegate?){
         self.mainViewDelegate = mainViewDelegate
@@ -49,7 +59,7 @@ class MainViewPresenter {
         guard let latitude = latitude, let longitude = longitude else { return }
         
         do {
-            try NetworkManager.shared.obtainWeatherResults(latitude: latitude, longitude: longitude) {[weak self] (result) in
+            try dataFetchable.obtainWeatherResults(latitude: latitude, longitude: longitude) {[weak self] (result) in
                 switch result {
                 case .success(let result):
                     let dailyForecasts = result.forecast.forecastday
@@ -71,7 +81,7 @@ class MainViewPresenter {
     
     func getPicture(from url: String) {
         guard let url = URL(string: "https:\(url)") else { return }
-        NetworkManager.shared.obtainPicture(from: url) { data, error in
+        dataFetchable.obtainPicture(from: url) { data, error in
             guard let data = data, error == nil else { return }
             
             DispatchQueue.main.async() { [weak self] in

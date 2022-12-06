@@ -19,10 +19,19 @@ class MainViewController: UIViewController {
     @IBOutlet weak var windLabel: UILabel!
     @IBOutlet weak var windDirectionImage: UIImageView!
     
-    private let presenter: MainViewPresenter = MainViewPresenter()
+    private var presenter: MainViewPresenter
     
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
+    
+    required init(presenter: MainViewPresenter) {
+        self.presenter = presenter
+        super.init(nibName: "MainViewController", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

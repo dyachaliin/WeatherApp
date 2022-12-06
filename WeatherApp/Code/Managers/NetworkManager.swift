@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 
+extension NetworkManager: DataFetchable {}
+
 final class NetworkManager {
     
     static let shared = NetworkManager()
