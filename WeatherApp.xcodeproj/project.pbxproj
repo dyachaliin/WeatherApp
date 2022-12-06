@@ -32,6 +32,7 @@
 		5DC70BD0293A177200A75CDB /* MainViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BCF293A177200A75CDB /* MainViewPresenter.swift */; };
 		5DC70BD3293A5C0600A75CDB /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */; };
 		5DC70BD4293A5C0600A75CDB /* ForecastCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */; };
+		5DD45BA2293F47ED00B8150F /* MapViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DD45BA1293F47ED00B8150F /* MapViewPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		5DC70BCF293A177200A75CDB /* MainViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewPresenter.swift; sourceTree = "<group>"; };
 		5DC70BD1293A5C0600A75CDB /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		5DC70BD2293A5C0600A75CDB /* ForecastCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForecastCell.xib; sourceTree = "<group>"; };
+		5DD45BA1293F47ED00B8150F /* MapViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewPresenter.swift; sourceTree = "<group>"; };
 		78028143D61FD42388C3B38A /* Pods-WeatherApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.debug.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E6F4EDE74CF21ED8DBD96700 /* Pods-WeatherApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherApp.release.xcconfig"; path = "Target Support Files/Pods-WeatherApp/Pods-WeatherApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -218,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				5DC70BCF293A177200A75CDB /* MainViewPresenter.swift */,
+				5DD45BA1293F47ED00B8150F /* MapViewPresenter.swift */,
 			);
 			path = Presenters;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 			files = (
 				5DB03833293E04F60032D347 /* GooglePlacesManager.swift in Sources */,
 				5DB03825293CB22D0032D347 /* SearchViewController.swift in Sources */,
+				5DD45BA2293F47ED00B8150F /* MapViewPresenter.swift in Sources */,
 				5DC70BCC2938C99E00A75CDB /* NetworkManager.swift in Sources */,
 				5DC70BD0293A177200A75CDB /* MainViewPresenter.swift in Sources */,
 				5DC70BC829382AB600A75CDB /* HourlyForecastCell.swift in Sources */,

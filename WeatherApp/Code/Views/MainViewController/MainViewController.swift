@@ -21,6 +21,8 @@ class MainViewController: UIViewController {
     
     private let presenter: MainViewPresenter = MainViewPresenter()
     
+//    weak var delegate: MapViewControllerDelegate?
+    
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
     
@@ -79,6 +81,13 @@ class MainViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func toMapController(_ sender: UIButton) {
+        guard let coordinate = currentLocation?.coordinate else { return }
+        let vc = MapViewController(coordinate: coordinate, presenter: MapViewPresenter())
+        vc.delegate = self
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension MainViewController: MainViewDelegate {
@@ -96,7 +105,14 @@ extension MainViewController: MainViewDelegate {
 
 extension MainViewController: SearchViewControllerDelegate {
     func getCoordinate(coordinate: CLLocationCoordinate2D) {
-        currentLocation = CLLocation(latitude: coordinate.latitude, longitude:  coordinate.longitude)
+        currentLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        self.requestWeatherForLocation()
+    }
+}
+
+extension MainViewController: MapViewControllerDelegate {
+    func getCoordinates(_ coordinates: CLLocationCoordinate2D) {
+        currentLocation = CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude)
         self.requestWeatherForLocation()
     }
 }

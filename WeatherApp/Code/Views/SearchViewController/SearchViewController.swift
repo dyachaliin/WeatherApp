@@ -34,14 +34,24 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         
         searchVC.searchResultsUpdater = self
         navigationItem.searchController = searchVC
-       
+        
+        setupSearchBar()
+        setBackButton()
+        
+        addConstraints()
+    }
+    
+    func setupSearchBar() {
+        searchVC.searchBar.tintColor = .white
+        searchVC.searchBar.setImage(UIImage(), for: .search, state: .normal)
+    }
+    
+    func setBackButton() {
         let backButton = UIButton(frame: CGRect(x: 0, y: 0, width: 26, height: 26))
         backButton.setImage(UIImage(named: "ic_back.pdf"), for: .normal)
         backButton.layer.masksToBounds = true
         backButton.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        
-        addConstraints()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
@@ -82,8 +92,10 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
 extension SearchViewController: ResultsViewControllerDelegate {
     func didTapPlace(with coordinate: CLLocationCoordinate2D) {
         DispatchQueue.main.async { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-            self?.delegate?.getCoordinate(coordinate: coordinate)
+            self?.searchVC.dismiss(animated: false, completion: {
+                self?.delegate?.getCoordinate(coordinate: coordinate)
+                self?.navigationController?.popViewController(animated: true)
+            })
         }
     }
 }
