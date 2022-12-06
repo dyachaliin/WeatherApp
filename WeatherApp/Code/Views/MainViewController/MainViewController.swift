@@ -21,8 +21,6 @@ class MainViewController: UIViewController {
     
     private let presenter: MainViewPresenter = MainViewPresenter()
     
-//    weak var delegate: MapViewControllerDelegate?
-    
     private let locationManager = CLLocationManager()
     private var currentLocation: CLLocation?
     
@@ -87,7 +85,6 @@ class MainViewController: UIViewController {
         vc.delegate = self
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension MainViewController: MainViewDelegate {
@@ -118,7 +115,6 @@ extension MainViewController: MapViewControllerDelegate {
 }
 
 extension MainViewController: CLLocationManagerDelegate {
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if !locations.isEmpty, currentLocation == nil {
             currentLocation = locations.first
@@ -126,7 +122,6 @@ extension MainViewController: CLLocationManagerDelegate {
             requestWeatherForLocation()
         }
     }
-    
 }
 
 extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
@@ -188,5 +183,4 @@ extension MainViewController:  UITableViewDelegate, UITableViewDataSource {
             scrollView.contentOffset.y = 0
         }
     }
-    
 }
