@@ -1,0 +1,24 @@
+PODS:
+  - Alamofire (5.6.2)
+  - GooglePlaces (7.1.0)
+  - Swinject (2.8.2)
+
+DEPENDENCIES:
+  - Alamofire
+  - GooglePlaces (= 7.1.0)
+  - Swinject
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - GooglePlaces
+    - Swinject
+
+SPEC CHECKSUMS:
+  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  GooglePlaces: 187946335ec3dc624de71c0a9ddcc712f19b0ee1
+  Swinject: b4a11b31992e8668308dc594ba1cb9b3164a37ab
+
+PODFILE CHECKSUM: a1669286c32d4423ccfc0b92ade114590119fa47
+
+COCOAPODS: 1.11.3
